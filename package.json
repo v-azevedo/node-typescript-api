@@ -1,0 +1,39 @@
+{
+  "name": "typescript-api",
+  "version": "1.0.0",
+  "description": "Typescript Node.js API",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn build && node dist/src/index.js",
+    "start:dev": "ts-node-dev 'src/index.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:functional": "jest --projects ./test --runInBand",
+    "lint": "eslint ./src ./test --ext .ts",
+    "lint:fix": "eslint ./src ./test --ext .ts --fix"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "api"
+  ],
+  "author": "Victor Azevedo",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^20.3.0",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "eslint": "^8.42.0",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.0"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.3"
+  }
+}

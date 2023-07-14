@@ -1,4 +1,5 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
+import AuthService from '@src/services/auth';
 
 export interface User {
   _id?: string;
@@ -11,7 +12,9 @@ export enum CUSTOM_VALIDATION {
   DUPLICATED = 'DUPLICATED',
 }
 
-const schema = new mongoose.Schema<User>(
+interface UserModel extends Omit<User, '_id'>, Document {}
+
+const schema = new mongoose.Schema<UserModel>(
   {
     name: { type: String, required: true },
     email: {
@@ -41,4 +44,17 @@ schema.path('email').validate(
   CUSTOM_VALIDATION.DUPLICATED
 );
 
-export const User: Model<User> = mongoose.model('User', schema);
+schema.pre<UserModel>('save', async function (): Promise<void> {
+  if (!this.password || !this.isModified('password')) {
+    return;
+  }
+
+  try {
+    const hashedPassword = await AuthService.hashPassword(this.password);
+    this.password = hashedPassword;
+  } catch (err) {
+    console.error(`Error hashing password for the user ${this.name}`);
+  }
+});
+
+export const User: Model<UserModel> = mongoose.model('User', schema);

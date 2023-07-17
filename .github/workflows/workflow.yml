@@ -30,8 +30,18 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: yarn --frozen-lockfile
 
-      - name: Run all tests
+      - name: Run All Tests
         run: yarn test
+
+      - name: Deploy Application
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'}}
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_API_KEY }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          retries: 20
+          wait: 16000
+          sleep: 30000

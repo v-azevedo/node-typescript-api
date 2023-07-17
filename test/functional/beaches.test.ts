@@ -51,7 +51,9 @@ describe('Beaches functional tests', () => {
 
       expect(response.status).toBe(422);
       expect(response.body).toEqual({
-        error:
+        code: 422,
+        error: 'Unprocessable Entity',
+        message:
           'Beach validation failed: lng: Cast to Number failed for value "invalid_value" (type string) at path "lng"',
       });
     });

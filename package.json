@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node /dist/src/index.js",
+    "start": "node ./dist/src/index.js",
     "start:local": "ts-node-dev --files 'src/index.ts' | pino-pretty -C",
     "test": "yarn test:unit && yarn test:functional",
     "test:functional": "jest --projects ./test --runInBand",

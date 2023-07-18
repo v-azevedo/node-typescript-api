@@ -5,12 +5,11 @@
       "mongoUrl": "MONGODB_URL"
     },
     "auth": {
-      "key": "some-key",
-      "tokenExpiresIn": "2 days"
+      "key": "JWT_SECRET_KEY"
     },
     "resources": {
       "StormGlass": {
-        "apiUrl": "https://api.stormglass.io/v2",
+        "apiUrl": "STORMGLASS_API_URL",
         "apiToken": "STORMGLASS_KEY"
       }
     }

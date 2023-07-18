@@ -1,4 +1,4 @@
-name: Full workflow
+name: Node-TypeScript-API
 
 on:
   push:

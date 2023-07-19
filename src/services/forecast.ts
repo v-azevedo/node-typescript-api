@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ForecastPoint, StormGlass } from '@src/clients/stormGlass';
+import { ForecastPoint, OpenMeteo } from '@src/clients/openMeteo';
 import logger from '@src/logger';
 import { Beach } from '@src/models/beach';
 import { InternalError } from '@src/util/errors/internal-errors';
@@ -20,7 +20,7 @@ export class ForecastProcessingInternalError extends InternalError {
 
 export class Forecast {
   constructor(
-    protected stormGlass = new StormGlass(),
+    protected openMeteo = new OpenMeteo(),
     protected RatingService: typeof Rating = Rating
   ) {}
 
@@ -49,7 +49,7 @@ export class Forecast {
 
     for (const beach of beaches) {
       const rating = new this.RatingService(beach);
-      const points = await this.stormGlass.fetchPoints(beach.lat, beach.lng);
+      const points = await this.openMeteo.fetchPoints(beach.lat, beach.lng);
       const enrichedBeachData = this.enrichedBeachData(points, beach, rating);
       pointsWithCorrectSources.push(...enrichedBeachData);
     }

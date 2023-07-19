@@ -1,4 +1,4 @@
-import stormGlassWeather3HoursFixture from '@test/fixtures/stormGlass_weather_3_hours.json';
+import openMeteoWeather3HoursFixture from '@test/fixtures/openMeteo_weather_3_hours.json';
 import apiForecastResponse1BeachFixture from '@test/fixtures/api_forecast_response_1_beach.json';
 import { Beach, GeoPosition } from '@src/models/beach';
 import nock from 'nock';
@@ -35,21 +35,15 @@ describe('Beach forecast functional tests', () => {
   it('should return a forecast with just a few times', async () => {
     // Interceps the request and returns with the nock format for the response
     // nock.recorder.rec();
-    nock('https://api.stormglass.io:443', {
-      encodedQueryParams: true,
-      reqheaders: {
-        Authorization: (): boolean => true,
-      },
-    })
+    nock('https://marine-api.open-meteo.com:443')
       .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .get('/v2/weather/point')
+      .get('/v1/marine')
       .query({
-        lat: '-33.792726',
-        lng: '151.289824',
-        params: /(.*)/,
-        source: 'noaa',
+        latitude: '-33.792726',
+        longitude: '151.289824',
+        hourly: /(.*)/,
       })
-      .reply(200, stormGlassWeather3HoursFixture);
+      .reply(200, openMeteoWeather3HoursFixture);
     const { body, status } = await global.testRequest
       .get('/forecast')
       .set({ 'x-access-token': token });
@@ -59,17 +53,13 @@ describe('Beach forecast functional tests', () => {
   });
 
   it('should return 500 if something goes wrong during the processing', async () => {
-    nock('https://api.stormglass.io:443', {
-      encodedQueryParams: true,
-      reqheaders: {
-        Authorization: (): boolean => true,
-      },
-    })
+    nock('https://marine-api.open-meteo.com:443')
       .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-      .get('/v2/weather/point')
+      .get('/v1/marine')
       .query({
-        lat: '-33.792726',
-        lng: '151.289824',
+        latitude: '-33.792726',
+        longitude: '151.289824',
+        hourly: /(.*)/,
       })
       .replyWithError('Something went wrong');
 

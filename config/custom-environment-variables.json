@@ -8,9 +8,9 @@
       "key": "JWT_SECRET_KEY"
     },
     "resources": {
-      "StormGlass": {
-        "apiUrl": "STORMGLASS_API_URL",
-        "apiToken": "STORMGLASS_KEY"
+      "OpenMeteo": {
+        "apiUrl": "OPENMETEO_API_URL",
+        "apiToken": "OPENMETEO_KEY"
       }
     }
   }

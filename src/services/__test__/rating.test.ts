@@ -1,6 +1,6 @@
 import { Beach, GeoPosition } from '@src/models/beach';
 import { Rating } from '../rating';
-import { ForecastPoint } from '@src/clients/stormGlass';
+import { ForecastPoint } from '@src/clients/openMeteo';
 
 describe('Rating Service', () => {
   const defaultBeach: Beach = {
@@ -20,7 +20,6 @@ describe('Rating Service', () => {
       time: 'test',
       waveDirection: 110,
       windDirection: 100,
-      windSpeed: 100,
       waveHeight: 0.1,
     };
 

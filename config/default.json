@@ -9,9 +9,8 @@
       "tokenExpiresIn": "2 days"
     },
     "resources": {
-      "StormGlass": {
-        "apiUrl": "https://api.stormglass.io/v2",
-        "apiToken": ""
+      "OpenMeteo": {
+        "apiUrl": "https://marine-api.open-meteo.com/v1"
       }
     },
     "logger": {

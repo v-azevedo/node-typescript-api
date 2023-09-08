@@ -58,7 +58,7 @@
     "jsonwebtoken": "^9.0.1",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
-    "mongoose": "^7.3.1",
+    "mongoose": "^7.3.3",
     "pino": "^8.14.1",
     "pino-http": "^8.3.3"
   }
